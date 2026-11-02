@@ -50,3 +50,23 @@ Potential consequences include:
 The assessment successfully demonstrated SQL Injection in DVWA at Low security level.
 
 The application returned all five user records because the submitted input altered the SQL query's logical condition.
+
+
+## 9. Security Level Comparison
+
+| Test | Low | High |
+|---|---|---|
+| Normal input (1) | Returned one record | Returned one record |
+| SQL injection payload | Returned five records | Returned no visible records |
+
+### Analysis
+
+At Low security, the application accepted the SQL injection payload and displayed five records.
+
+At High security, the same payload returned no visible records because the application used numeric input validation.
+
+This confirms that the specific payload was blocked at High. It does not prove that all SQL injection attacks are prevented.
+
+### Recommendation
+
+Use parameterized queries or prepared statements to prevent SQL injection.
