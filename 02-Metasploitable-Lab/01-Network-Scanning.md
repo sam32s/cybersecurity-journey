@@ -34,18 +34,30 @@ sudo nmap -sS 192.168.50.20
 
 Result:
 
-Target host was discovered as UP.
-Multiple TCP ports were found OPEN.
-The target exposed several network services.
-5. Service and Version Detection
+
+**Result:**
+
+- Target host status: UP.
+- Multiple TCP ports were discovered OPEN.
+- Several network services were exposed.
+- The scan confirmed that the target was reachable and accepting connections on multiple ports.
 
 Command:
 
 sudo nmap -sV 192.168.50.20
 
+**Analysis:**
+
+The scan revealed several outdated services, including:
+- vsftpd 2.3.4
+- OpenSSH 4.7p1
+- Apache 2.2.8
+- MySQL 5.0.51a
+
+These outdated versions may contain known security vulnerabilities and require further assessment.
 Important services identified:
 
-Port	Service	Detected Version
+5 Port	Service	Detected Version
 21	FTP	vsftpd 2.3.4
 22	SSH	OpenSSH 4.7p1
 23	Telnet	Linux telnetd
@@ -56,11 +68,22 @@ Port	Service	Detected Version
 5432	PostgreSQL	8.3.x
 6667	IRC	UnrealIRCd
 8180	HTTP	Apache Tomcat
+
 6. SSH Enumeration
 
 Command:
 
 sudo nmap --script ssh2-enum-algos -p 22 192.168.50.20
+
+**Security Analysis:**
+
+The SSH server supports legacy cryptographic algorithms, including:
+
+- ssh-rsa
+- ssh-dss
+- diffie-hellman-group1-sha1
+
+These older algorithms may introduce security risks. Modern SSH configurations should prioritize stronger cryptographic algorithms.
 
 Finding:
 
